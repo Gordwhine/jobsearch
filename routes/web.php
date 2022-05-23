@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JobsController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\ForgotPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,10 @@ Route::get('/', function () {
                     ->first()
     ]);
 });
+
+Route::get('/auth', [ForgotPasswordController::class, 'reset'])->name('password.request');
+Route::get('/resetpassword', [ForgotPasswordController::class, 'getPassword'])->name('password.getPassword');
+Route::get('/confirm', [ForgotPasswordController::class, 'confirm'])->name('password.confirm');
 
 Route::get('/listings', [JobsController::class, 'index'])->name('listings');
 Route::get('/listings/{job}', [JobsController::class, 'show'])->name('show');
